@@ -4,6 +4,7 @@
       recursive: true
 - link:
     ~/.bashrc_local: .bashrc_local
+    ~/.config/nvim: nvim/
 - shell:
     - 
       command: ./install-bashrc_local
