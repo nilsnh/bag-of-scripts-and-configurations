@@ -23,6 +23,14 @@ colorscheme darkblue
 let mapleader=" "
 nnoremap <SPACE> <Nop>
 
+" SourceLocal loads relative files.
+" see: https://stackoverflow.com/a/48828172
+function! SourceLocal(relativePath)
+  let root = expand('%:p:h')
+  let fullPath = root . '/'. a:relativePath
+  exec 'source ' . fullPath
+endfunction
+
 call plug#begin()
 Plug 'nvim-lualine/lualine.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -41,6 +49,8 @@ require'lualine'.setup{
 require'nvim-tree'.setup()
 END
 
+lua require('lspconfig')
+
 " Reload config
 nnoremap <leader>sv :source $MYVIMRC<CR> 
 
@@ -50,12 +60,10 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
-
+" NvimTreeOpen, NvimTreeClose, NvimTreeFocus, NvimTreeFindFileToggle, and NvimTreeResize are also available if you need them
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
-" NvimTreeOpen, NvimTreeClose, NvimTreeFocus, NvimTreeFindFileToggle, and NvimTreeResize are also available if you need them
-
 
 " a list of groups can be found at `:help nvim_tree_highlight`
 highlight NvimTreeFolderIcon guibg=blue
