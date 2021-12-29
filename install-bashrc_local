@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+if [[ "Linux" != *"$(uname -s)"* ]]; then
+  echo "Not sourcing .bashrc_local on anything but Linux"
+elif grep -q bashrc_local ~/.bashrc; then
+  echo "Already sourcing .bashrc_local, skipping."
+else 
+IMPORT_STATEMENT=$(cat << "EOF"
+
+# Import additional functionality from dotfile setup.
+if [ -f ".bashrc_local" ]; then
+  source ".bashrc_local"
+fi
+EOF
+)
+echo "$IMPORT_STATEMENT" >> ~/.bashrc
+fi
+
+exit 0
