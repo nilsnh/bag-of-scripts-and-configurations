@@ -14,10 +14,7 @@ set wildmode=longest,list   " get bash-like tab completions
 filetype plugin indent on   " allows auto-indenting depending on file type
 syntax on                   " syntax highlighting
 set mouse=a
-if (has("termguicolors"))
- set termguicolors
-endif
-colorscheme darkblue
+colorscheme slate
 
 " Source: https://stackoverflow.com/a/446293
 let mapleader=" "
@@ -38,6 +35,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'neovim/nvim-lspconfig'
+Plug 'glepnir/lspsaga.nvim'
 call plug#end()
 
 lua << END
@@ -47,6 +45,14 @@ require'lualine'.setup{
   }
 }
 require'nvim-tree'.setup()
+local saga = require 'lspsaga'
+saga.init_lsp_saga {
+  error_sign = '',
+  warn_sign = '',
+  hint_sign = '',
+  infor_sign = '',
+  border_style = "round",
+}
 END
 
 lua require('lspconfig')
@@ -67,6 +73,24 @@ nnoremap <leader>n :NvimTreeFindFile<CR>
 
 " a list of groups can be found at `:help nvim_tree_highlight`
 highlight NvimTreeFolderIcon guibg=blue
+
+nnoremap <silent>K :Lspsaga hover_doc<CR>
+
+" Make an easy save
+inoremap <c-s> <Esc>:w<CR>
+nnoremap <c-s> :w<CR>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
