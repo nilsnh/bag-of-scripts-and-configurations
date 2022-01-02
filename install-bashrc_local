@@ -8,8 +8,8 @@ else
 IMPORT_STATEMENT=$(cat << "EOF"
 
 # Import additional functionality from dotfile setup.
-if [ -f ".bashrc_local" ]; then
-  source ".bashrc_local"
+if [ -f "/home/nilsnh/.bashrc_local" ]; then
+  source "/home/nilsnh/.bashrc_local"
 fi
 EOF
 )
